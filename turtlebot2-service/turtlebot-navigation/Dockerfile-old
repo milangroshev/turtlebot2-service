@@ -1,0 +1,18 @@
+FROM brain:kinetic
+MAINTAINER mgroshev@pa.uc3m.es
+
+
+USER docker
+WORKDIR /home/docker/
+RUN mkdir -p /home/docker/scripts
+COPY scripts/* /home/docker/scripts/
+
+WORKDIR /home/docker/scripts/
+USER root
+RUN chmod +755 wait-for-ros-nodes.sh
+
+USER docker
+
+CMD bash -c "./wait-for-ros-nodes.sh"
+
+
