@@ -1,18 +1,36 @@
-FROM brain:kinetic
+FROM ros:kinetic
 MAINTAINER mgroshev@pa.uc3m.es
 
+WORKDIR /root
+RUN useradd -ms /bin/bash turtlebot
 
-USER docker
-WORKDIR /home/docker/
-RUN mkdir -p /home/docker/scripts
-COPY scripts/* /home/docker/scripts/
+RUN \
+  apt-get update && \
+  apt-get install -y lsof && \
+  apt-get install -y python-rosinstall python-rosinstall-generator && \
+  apt-get install -y ros-kinetic-turtlebot-bringup
 
-WORKDIR /home/niryo/scripts/
+
+COPY launch/* /opt/ros/kinetic/share/turtlebot_bringup/launch/
+
+USER turtlebot
+WORKDIR /home/turtlebot
+
+
+RUN mkdir -p catkin_ws/src && cd catkin_ws/src && \
+    git clone https://github.com/Slamtec/rplidar_ros.git .
+
+RUN cd catkin_ws && bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
+
+
+RUN mkdir -p /home/turtlebot/scripts
+COPY scripts/* /home/turtlebot/scripts/
+WORKDIR /home/turtlebot/scripts/
+
 USER root
 RUN chmod +755 wait-for-ros-nodes.sh
 
-USER docker
+COPY rules/* /etc/udev/rules.d/
 
+USER turtlebot
 CMD bash -c "./wait-for-ros-nodes.sh"
-
-
