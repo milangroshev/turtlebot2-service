@@ -24,7 +24,7 @@ in_array () {
          return 0
 }
 
-in_array ros_nodes "/niryo_one_driver" "/niryo_one_tools"
+in_array ros_nodes "/map_server"
 out=$?
 
 while [ $out -eq 1 ]
@@ -32,10 +32,11 @@ do
         echo "Required ROS nodes are unavailable - sleeping"
         source /opt/ros/kinetic/setup.bash
         ros_nodes=($(rosnode list))
-        in_array ros_nodes "/niryo_one_driver" "/niryo_one_tools"
+        in_array ros_nodes "/map_server"
         out=$?
         sleep 1
 done
 
 source /opt/ros/kinetic/setup.bash
-roslaunch turtlebot_navigation amcl.launch
+source ~/catkin_ws/devel/setup.bash 
+roslaunch turtlebot_bringup kobuki_rplidar_robot.launch 

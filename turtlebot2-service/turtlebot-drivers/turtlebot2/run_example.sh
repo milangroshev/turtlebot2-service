@@ -4,9 +4,9 @@
 echo 'Running auto-nav docker image.'
 
 sudo docker run \
-        --hostname auto-nav \
+        --hostname drivers \
         -it \
-        --name auto-nav \
+        --name drivers \
         --rm \
         --net host\
         -e ROS_MASTER_URI="http://192.168.55.99:11311" \
@@ -14,4 +14,5 @@ sudo docker run \
         --add-host roscore-map-server:192.168.55.99 \
         --add-host amcl:192.168.55.99 \
         --add-host auto-nav:192.168.55.99 \
-        auto-nav:latest
+        --add-host drivers:192.168.55.99 \
+        turtlebot-drivers:latest
