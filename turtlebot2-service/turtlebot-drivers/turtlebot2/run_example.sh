@@ -14,5 +14,7 @@ sudo docker run \
         --add-host roscore-map-server:192.168.55.99 \
         --add-host amcl:192.168.55.99 \
         --add-host auto-nav:192.168.55.99 \
-        --add-host drivers:192.168.55.99 \
+        --add-host drivers:192.168.55.77 \
+        --device=/dev/kobuki \
+        --device=/dev/rplidar \
         turtlebot-drivers:latest

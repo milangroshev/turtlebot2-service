@@ -8,6 +8,7 @@ sudo docker run \
         -it \
         --name roscore-map-server \
         --rm \
+        -d \
         --net host\
         -e ROS_MASTER_URI="http://192.168.55.99:11311" \
         --add-host robot01:192.168.55.7 \
