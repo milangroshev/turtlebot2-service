@@ -1,0 +1,3 @@
+<launch>
+ <node pkg="turtlebot_navigation" type="ros_loger.py" name="ros_writer" />
+</launch>
