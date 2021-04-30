@@ -10,10 +10,10 @@ sudo docker run \
         --rm \
         -d \
         --net host\
-        -e ROS_MASTER_URI="http://127.0.0.1:11311" \
-        --add-host robot01:127.0.0.1 \
-        --add-host roscore-map-server:127.0.0.1 \
-        --add-host amcl:127.0.0.1 \
-        --add-host auto-nav:127.0.0.1 \
-        --add-host drivers:127.0.0.1 \
+        -e ROS_MASTER_URI="http://192.168.55.99:11311" \
+        --add-host robot01:192.168.55.7 \
+        --add-host roscore-map-server:192.168.55.99 \
+        --add-host amcl:192.168.55.99 \
+        --add-host auto-nav:192.168.55.99 \
+        --add-host drivers:192.168.55.77 \
         roscore-map-server:latest
