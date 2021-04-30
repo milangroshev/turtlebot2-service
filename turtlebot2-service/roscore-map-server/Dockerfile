@@ -18,4 +18,4 @@ COPY launch/* /opt/ros/kinetic/share/map_server/
 USER turtlebot
 WORKDIR /home/turtlebot/
 
-CMD bash -c "source /opt/ros/kinetic/setup.bash && roslaunch map_server roscore_map_server.launch"
+CMD bash -c "source /opt/ros/kinetic/setup.bash && roslaunch map_server roscore_map_server.launch --screen"

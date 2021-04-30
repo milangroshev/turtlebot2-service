@@ -38,4 +38,4 @@ do
 done
 
 source /opt/ros/kinetic/setup.bash
-roslaunch turtlebot_navigation auto_nav.launch
+roslaunch turtlebot_navigation auto_nav.launch --screen

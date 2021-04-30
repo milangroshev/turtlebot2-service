@@ -38,4 +38,4 @@ do
 done
 
 source /opt/ros/kinetic/setup.bash
-roslaunch amcl amcl.launch
+roslaunch amcl amcl.launch --screen
