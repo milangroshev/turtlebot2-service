@@ -20,11 +20,8 @@ WORKDIR /home/turtlebot
 RUN mkdir -p catkin_ws/src && cd catkin_ws/src && \
     git clone https://github.com/Slamtec/rplidar_ros.git
 
-
 COPY launch/kobuki_rplidar.launch catkin_ws/src/rplidar_ros/launch/
-
 RUN cd catkin_ws && bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
-
 
 RUN mkdir -p /home/turtlebot/scripts
 COPY scripts/* /home/turtlebot/scripts/
@@ -32,6 +29,9 @@ WORKDIR /home/turtlebot/scripts/
 
 USER root
 RUN chmod +755 wait-for-ros-nodes.sh
+
+RUN rm -rf /opt/ros/kinetic/share/kobuki_node/param/base.yaml
+COPY param/* /opt/ros/kinetic/share/kobuki_node/param/
 
 COPY rules/* /etc/udev/rules.d/
 RUN chmod +755 /etc/udev/rules.d/rplidar.rules
