@@ -1,6 +1,7 @@
 <launch>
-<group ns="robot1">
-    <param name="tf_prefix" value="robot1_tf" />
+<arg name="scan_topic"   default="$(env SCAN_TOPIC)"/>
+<group ns="robot_0">
+    <param name="tf_prefix" value="robot_0" />
 
   <include file="$(find turtlebot_navigation)/launch/includes/velocity_smoother.launch.xml"/>
   <include file="$(find turtlebot_navigation)/launch/includes/safety_controller.launch.xml"/>
@@ -27,7 +28,7 @@
 
     <remap from="cmd_vel" to="navigation_velocity_smoother/raw_cmd_vel"/>
     <remap from="odom" to="odom"/>
-    <remap from="scan" to="scan"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
 
   </node>
 

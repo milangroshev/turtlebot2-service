@@ -1,7 +1,12 @@
 <launch>
-<group ns="robot1">
-    <param name="tf_prefix" value="robot1_tf" />
 
+<arg name="pose_x"       default="$(env POSE_X)"/>
+<arg name="pose_y"       default="$(env POSE_Y)"/> 
+<arg name="pose_a"       default="$(env POSE_A)"/>
+<arg name="scan_topic"   default="$(env SCAN_TOPIC)"/>
+
+<group ns="robot_0">
+   <param name="tf_prefix" value="robot_0" />
   <node pkg="amcl" type="amcl" name="amcl">
     <param name="use_map_topic"             value="true"/>
     <!-- Publish scans from best pose at a max of 10 Hz -->
@@ -30,18 +35,18 @@
     <param name="laser_likelihood_max_dist" value="2.0"/>
     <param name="update_min_d"              value="0.25"/>
     <param name="update_min_a"              value="0.2"/>
-    <param name="odom_frame_id"             value="robot1_tf/odom"/>
-    <param name="base_frame_id"             value="robot1_tf/base_footprint"/>
+    <param name="odom_frame_id"             value="robot_0/odom"/>
+    <param name="base_frame_id"             value="robot_0/base_footprint"/>
     <param name="global_frame_id"           value="/map"/>
     <param name="resample_interval"         value="1"/>
     <!-- Increase tolerance because the computer can get quite busy -->
     <param name="transform_tolerance"       value="1"/>
     <param name="recovery_alpha_slow"       value="0.0"/>
     <param name="recovery_alpha_fast"       value="0.0"/>
-    <param name="initial_pose_x"            value="25.4257465477"/>
-    <param name="initial_pose_y"            value="-27.7792925777"/>
-    <param name="initial_pose_a"            value="1.4"/>
-    <remap from="scan"                      to="scan"/>
+    <param name="initial_pose_x"            value="$(arg pose_x)"/>
+    <param name="initial_pose_y"            value="$(arg pose_y)"/>
+    <param name="initial_pose_a"            value="$(arg pose_a)"/>
+    <remap from="scan"                      to="$(arg scan_topic)"/>
     <remap from="map"                       to="/map"/>
   </node>
 

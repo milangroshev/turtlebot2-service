@@ -38,4 +38,5 @@ do
 done
 
 source /opt/ros/kinetic/setup.bash
+source ~/catkin_ws/devel/setup.bash
 roslaunch turtlebot_bringup turtlebot_robot.launch

@@ -1,7 +1,7 @@
 <launch>
  <!-- <include file="$(find turtlebot_bringup)/launch/minimal.launch" /> -->
-  <group ns="robot1">
-   <param name="tf_prefix" value="robot1_tf" />
+  <group ns="robot_0">
+   <param name="tf_prefix" value="robot_0" />
   <include file="$(find turtlebot_bringup)/launch/minimal.launch" />
   <include file="$(find rplidar_ros)/launch/kobuki_rplidar.launch" />
   </group>

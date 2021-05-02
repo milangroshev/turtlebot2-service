@@ -1,6 +1,14 @@
 <launch>
- <!-- <include file="$(find turtlebot_bringup)/launch/minimal.launch" /> -->
-  <group ns="robot1">
+  <arg name="world_file"     default=" $(env TURTLEBOT_STAGE_WORLD_FILE)"/>
+  <node pkg="stage_ros" type="stageros" name="stageros" args="$(arg world_file)">
+    <param name="base_watchdog_timeout" value="0.5"/>
+    <remap from="robot_0/odom" to="robot_0/odom"/>
+    <remap from="robot_0/base_pose_ground_truth" to="robot_0/base_pose_ground_truth"/>
+    <remap from="robot_0/cmd_vel" to="robot_0/mobile_base/commands/velocity"/>
+    <remap from="robot_0/base_scan" to="robot_0/scan"/>
+  </node>
+
+  <group ns="robot_0">
      <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
     <arg name="base" value="kobuki" />
     <arg name="stacks" value="hexagons" />
@@ -9,7 +17,7 @@
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   </group>
 
-  <group ns="robot1">
+  <group ns="robot_0">
   <!-- Command Velocity multiplexer -->
   <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
   <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">

@@ -30,7 +30,7 @@ publish_tf: true
 use_imu_heading: true
 
 # Name of the odometry TF frame (string, default: odom)
-odom_frame: robot_0/odom
+odom_frame: robot1_tf/odom
 
 # Name of the base TF frame  (string, default: base_footprint)
-base_frame: robot_0/base_footprint
+base_frame: robot1_tf/base_footprint

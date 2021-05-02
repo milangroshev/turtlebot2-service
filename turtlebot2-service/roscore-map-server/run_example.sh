@@ -19,4 +19,5 @@ sudo docker run \
         --add-host amcl:127.0.0.1 \
         --add-host auto-nav:127.0.0.1 \
         --add-host drivers:127.0.0.1 \
+        --add-host digital-twin:127.0.1.1 \
         roscore-map-server:latest

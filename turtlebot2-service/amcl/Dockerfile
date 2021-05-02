@@ -22,7 +22,7 @@ COPY scripts/* /home/turtlebot/scripts/
 WORKDIR /home/turtlebot/scripts/
 
 USER root
-RUN chmod +755 wait-for-ros-nodes.sh
+RUN chmod +755 wait-for-ros-nodes*
 USER turtlebot
 
-CMD bash -c "./wait-for-ros-nodes.sh"
+CMD bash -c "./wait-for-ros-nodes-sim.sh"
