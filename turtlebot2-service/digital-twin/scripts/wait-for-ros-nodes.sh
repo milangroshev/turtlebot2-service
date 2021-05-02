@@ -24,7 +24,7 @@ in_array () {
          return 0
 }
 
-in_array ros_nodes "/map_server" "/robot1/mobile_base" "/robot1/rplidarNode"
+in_array ros_nodes "/robot_0/move_base"
 out=$?
 
 while [ $out -eq 1 ]
@@ -32,10 +32,10 @@ do
         echo "Required ROS nodes are unavailable - sleeping"
         source /opt/ros/kinetic/setup.bash
         ros_nodes=($(rosnode list))
-        in_array ros_nodes "/map_server" "/robot1/mobile_base" "/robot1/rplidarNode"
+        in_array ros_nodes "/robot_0/move_base"
         out=$?
         sleep 1
 done
 
 source /opt/ros/kinetic/setup.bash
-roslaunch amcl amcl.launch --screen
+roslaunch rviz rviz.launch --screen

@@ -1,0 +1,9 @@
+<launch>
+
+<group ns="robot_0">
+
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find rviz)/robot_0_navigation.rviz"/>
+
+</group>
+
+</launch>
