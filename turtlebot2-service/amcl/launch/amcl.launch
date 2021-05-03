@@ -4,9 +4,12 @@
 <arg name="pose_y"       default="$(env POSE_Y)"/> 
 <arg name="pose_a"       default="$(env POSE_A)"/>
 <arg name="scan_topic"   default="$(env SCAN_TOPIC)"/>
+<arg name="robot_ns"     default="$(env ROBOT_NS)"/>
+<arg name="odom_frame"     default="$(env ODOM_FRAME)"/>
+<arg name="base_frame"     default="$(env BASE_FRAME)"/>
 
-<group ns="robot_0">
-   <param name="tf_prefix" value="robot_0" />
+<group ns="$(arg robot_ns)">
+   <param name="tf_prefix" value="$(arg robot_ns)" />
   <node pkg="amcl" type="amcl" name="amcl">
     <param name="use_map_topic"             value="true"/>
     <!-- Publish scans from best pose at a max of 10 Hz -->
@@ -35,8 +38,8 @@
     <param name="laser_likelihood_max_dist" value="2.0"/>
     <param name="update_min_d"              value="0.25"/>
     <param name="update_min_a"              value="0.2"/>
-    <param name="odom_frame_id"             value="robot_0/odom"/>
-    <param name="base_frame_id"             value="robot_0/base_footprint"/>
+    <param name="odom_frame_id"             value="$(arg odom_frame)"/>
+    <param name="base_frame_id"             value="$(arg base_frame)"/>
     <param name="global_frame_id"           value="/map"/>
     <param name="resample_interval"         value="1"/>
     <!-- Increase tolerance because the computer can get quite busy -->

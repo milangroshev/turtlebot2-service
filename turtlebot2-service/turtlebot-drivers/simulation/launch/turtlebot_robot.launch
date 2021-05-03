@@ -6,6 +6,10 @@
     <remap from="robot_0/base_pose_ground_truth" to="robot_0/base_pose_ground_truth"/>
     <remap from="robot_0/cmd_vel" to="robot_0/mobile_base/commands/velocity"/>
     <remap from="robot_0/base_scan" to="robot_0/scan"/>
+    <remap from="robot_1/odom" to="robot_1/odom"/>
+    <remap from="robot_1/base_pose_ground_truth" to="robot_1/base_pose_ground_truth"/>
+    <remap from="robot_1/cmd_vel" to="robot_1/mobile_base/commands/velocity"/>
+    <remap from="robot_1/base_scan" to="robot_1/scan"/>
   </node>
 
   <group ns="robot_0">
@@ -25,4 +29,23 @@
     <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
   </node>
   </group>
+
+  <group ns="robot_1">
+     <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
+    <arg name="base" value="kobuki" />
+    <arg name="stacks" value="hexagons" />
+    <arg name="3d_sensor" value="kinect" />
+  </include>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  </group>
+
+  <group ns="robot_1">
+  <!-- Command Velocity multiplexer -->
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
+    <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml"/>
+    <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
+  </node>
+  </group>
+
 </launch>
