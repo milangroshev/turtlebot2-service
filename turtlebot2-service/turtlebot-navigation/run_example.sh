@@ -10,7 +10,7 @@ ROBOT_NS="robot_0"
 sudo docker run \
         --hostname auto-nav \
         -it \
-        -d \
+	-d \
         --name auto-nav \
         --rm \
         --net host\

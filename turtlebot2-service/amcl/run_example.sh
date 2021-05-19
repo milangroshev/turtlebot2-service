@@ -14,7 +14,7 @@ BASE_FRAME="robot_0/base_footprint"
 sudo docker run \
         --hostname amcl \
         -it \
-        -d \
+	-d \
         --name amcl \
         --rm \
         --net host\

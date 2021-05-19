@@ -8,11 +8,14 @@ XAUTH=/tmp/.docker.xauth
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 chmod 777 $XAUTH
 
+
+
 sudo docker run \
         --hostname drivers \
         -it \
-        -d \
-        -e DISPLAY="drivers:10.0" \
+	-d \
+        -e DISPLAY=$DISPLAY \
+	-e XAUTHORITY="/home/turtlebot/.Xauthority" \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -v $HOME/.Xauthority:/home/turtlebot/.Xauthority \
         --name drivers \
@@ -26,4 +29,5 @@ sudo docker run \
         --add-host auto-nav:127.0.0.1 \
         --add-host drivers:127.0.1.1 \
         --add-host digital-twin:127.0.1.1 \
+	--add-host turtlebot2:127.0.1.1 \
         sim-turtlebot-drivers:latest
