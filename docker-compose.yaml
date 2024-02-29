@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  ros-master:
+    image: roscore-map-server
+    environment:
+      - "ROS_MASTER_URI=http://roscore-map-server:11311"
+      - "TURTLEBOT_STAGE_MAP_FILE=/opt/ros/kinetic/share/map_server/maze.yaml"
+    hostname: roscore-map-server
+  turtlebot-drivers:
+    image: sim-turtlebot-drivers
+    hostname: drivers
+    environment:
+      - "ROS_MASTER_URI=http://roscore-map-server:11311"
+      - "DISPLAY=$DISPLAY"
+      - "XAUTHORITY=/home/turtlebot/.Xauthority"
+      - "TURTLEBOT_STAGE_WORLD_FILE=/home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/twoRobotsMaze.world"
+    volumes:
+    - "/tmp/.X11-unix:/tmp/.X11-unix"
+    - "$HOME/.Xauthority:/home/turtlebot/.Xauthority"
+  turtlebot-amcl:
+    image: amcl
+    hostname: amcl
+    environment:
+      - "ROS_MASTER_URI=http://roscore-map-server:11311"
+      - "POSE_X=2.0"
+      - "POSE_Y=2.0"
+      - "POSE_A=0.0"
+      - "SCAN_TOPIC=scan"
+      - "ROBOT_NS=robot_0"
+      - "ODOM_FRAME=robot_0/odom"
+      - "BASE_FRAME=robot_0/base_footprint"
+  turtlebot-nav:
+    image: auto-nav
+    hostname: auto-nav
+    environment:
+      - "ROS_MASTER_URI=http://roscore-map-server:11311"
+      - "SCAN_TOPIC=scan"
+      - "ROBOT_NS=robot_0"
+  turtlebot-control:
+    image: digital-twin
+    hostname: digital-twin
+    environment:
+      - "ROS_MASTER_URI=http://roscore-map-server:11311"
+      - "DISPLAY=$DISPLAY"
+      - "XAUTHORITY=/home/turtlebot/.Xauthority"
+    volumes:
+    - "/tmp/.X11-unix:/tmp/.X11-unix"
+    - "$HOME/.Xauthority:/home/turtlebot/.Xauthority"

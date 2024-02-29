@@ -9,9 +9,10 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 chmod 777 $XAUTH
 
 
-sudo docker run \
+docker run \
         --hostname digital-twin \
         -it \
+        -d \
         -e DISPLAY=$DISPLAY \
 	-e XAUTHORITY="/home/turtlebot/.Xauthority" \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -20,7 +21,7 @@ sudo docker run \
         --rm \
         --net host\
         -e ROS_MASTER_URI="http://127.0.0.1:11311" \
-        --add-host robot01:192.168.55.7 \
+        --add-host robot01:127.0.0.1 \
         --add-host roscore-map-server:127.0.0.1 \
         --add-host amcl:127.0.0.1 \
         --add-host auto-nav:127.0.0.1 \

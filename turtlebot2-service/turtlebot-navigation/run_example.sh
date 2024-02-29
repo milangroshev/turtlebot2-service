@@ -7,7 +7,7 @@ SCAN_TOPIC="scan"
 ROBOT_NS="robot_0"
 
 
-sudo docker run \
+docker run \
         --hostname auto-nav \
         -it \
 	-d \
@@ -17,7 +17,7 @@ sudo docker run \
         -e ROS_MASTER_URI="http://127.0.0.1:11311" \
         -e SCAN_TOPIC=$SCAN_TOPIC \
         -e ROBOT_NS=$ROBOT_NS \
-        --add-host robot01:192.168.55.7 \
+        --add-host robot01:127.0.0.1 \
         --add-host roscore-map-server:127.0.0.1 \
         --add-host amcl:127.0.0.1 \
         --add-host auto-nav:127.0.0.1 \

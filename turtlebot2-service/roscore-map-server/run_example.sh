@@ -5,7 +5,7 @@ echo 'Running roscore docker image.'
 
 MAP="/opt/ros/kinetic/share/map_server/maze.yaml"
 
-sudo docker run \
+docker run \
         --hostname roscore-map-server \
         -it \
         --name roscore-map-server \

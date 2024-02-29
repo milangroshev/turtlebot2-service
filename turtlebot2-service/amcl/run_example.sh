@@ -11,10 +11,10 @@ ROBOT_NS="robot_0"
 ODOM_FRAME="robot_0/odom"
 BASE_FRAME="robot_0/base_footprint"
 
-sudo docker run \
+docker run \
         --hostname amcl \
         -it \
-	-d \
+        -d \
         --name amcl \
         --rm \
         --net host\
