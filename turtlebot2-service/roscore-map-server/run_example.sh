@@ -10,7 +10,6 @@ docker run \
         -it \
         --name roscore-map-server \
         --rm \
-        -d \
         --net host\
         -e ROS_MASTER_URI="http://127.0.0.1:11311" \
         -e TURTLEBOT_STAGE_MAP_FILE=$MAP \
@@ -20,4 +19,5 @@ docker run \
         --add-host auto-nav:127.0.0.1 \
         --add-host drivers:127.0.0.1 \
         --add-host digital-twin:127.0.1.1 \
+	--add-host stage-ros:127.0.1.1 \
         roscore-map-server:latest

@@ -13,7 +13,7 @@ chmod 777 $XAUTH
 docker run \
         --hostname drivers \
         -it \
-        -d \
+	-d \
         -e DISPLAY=$DISPLAY \
 	-e XAUTHORITY="/home/turtlebot/.Xauthority" \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -30,4 +30,5 @@ docker run \
         --add-host drivers:127.0.1.1 \
         --add-host digital-twin:127.0.1.1 \
 	--add-host turtlebot2:127.0.1.1 \
+	--add-host stage-ros:127.0.1.1 \
         sim-turtlebot-drivers:latest

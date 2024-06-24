@@ -10,9 +10,9 @@ ROBOT_NS="robot_0"
 docker run \
         --hostname auto-nav \
         -it \
-	-d \
         --name auto-nav \
         --rm \
+	-d \
         --net host\
         -e ROS_MASTER_URI="http://127.0.0.1:11311" \
         -e SCAN_TOPIC=$SCAN_TOPIC \
@@ -23,4 +23,5 @@ docker run \
         --add-host auto-nav:127.0.0.1 \
         --add-host drivers:127.0.0.1 \
         --add-host digital-twin:127.0.1.1 \
+	--add-host stage-ros:127.0.1.1 \
         auto-nav:latest
