@@ -74,7 +74,7 @@ class map_navigation():
   def moveToGoal(self,xGoal,yGoal):
 
       #define a client for to send goal requests to the move_base server through a SimpleActionClient
-      ac = actionlib.SimpleActionClient("move_base", MoveBaseAction)
+      ac = actionlib.SimpleActionClient("/robot_0/move_base", MoveBaseAction)
 
       #wait for the action server to come up
       while(not ac.wait_for_server(rospy.Duration.from_sec(5.0))):

@@ -12,8 +12,8 @@ RUN \
   apt-get install -y xauth && \
   apt-get install -y python-rosinstall python-rosinstall-generator && \
   apt-get install -y ros-kinetic-rviz && \
-  apt-get install -y ros-kinetic-turtlebot-navigation
-
+  apt-get install -y ros-kinetic-turtlebot-navigation && \
+  apt-get install -y vim
 
 COPY launch/* /opt/ros/kinetic/share/rviz/launch/
 COPY rviz/* /opt/ros/kinetic/share/rviz/
@@ -27,6 +27,8 @@ WORKDIR /home/turtlebot/scripts/
 
 USER root
 RUN chmod +755 wait-for-ros-nodes.sh
+RUN chmod +755 map_navigation.py
 USER turtlebot
 ENV HOME /home/turtlebot
-CMD bash -c "./wait-for-ros-nodes.sh"
+CMD ["python", "./map_navigation.py"]
+#CMD bash -c "./wait-for-ros-nodes.sh"

@@ -16,7 +16,6 @@ docker run \
         -it \
         --name amcl \
         --rm \
-	-d \
         --net host\
         -e ROS_MASTER_URI="http://127.0.0.1:11311" \
         -e POSE_X=$POSE_X \

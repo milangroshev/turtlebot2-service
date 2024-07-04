@@ -13,7 +13,6 @@ chmod 777 $XAUTH
 docker run \
         --hostname drivers \
         -it \
-	-d \
         -e DISPLAY=$DISPLAY \
 	-e XAUTHORITY="/home/turtlebot/.Xauthority" \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
