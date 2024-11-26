@@ -1,0 +1,9 @@
+[
+    {
+        "context_features": {}, 
+        "sensor_data": {}, 
+        "context_label": "Room with Static Objects", 
+        "policy_data": {}, 
+        "robot_state": {}
+    }
+]
