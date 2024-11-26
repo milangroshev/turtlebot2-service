@@ -21,7 +21,7 @@ docker run \
         --rm \
         --net host\
         -e ROS_MASTER_URI="http://127.0.0.1:11311" \
-        -e TURTLEBOT_STAGE_WORLD_FILE="/home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/twoRobotsMaze.world" \
+        -e TURTLEBOT_STAGE_WORLD_FILE="/home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/room_with_static_objects.world" \
         --add-host robot01:127.0.0.1 \
         --add-host roscore-map-server:127.0.0.1 \
         --add-host amcl:127.0.0.1 \

@@ -14,7 +14,7 @@ services:
       - "ROS_MASTER_URI=http://roscore-map-server:11311"
       - "DISPLAY=$DISPLAY"
       - "XAUTHORITY=/home/turtlebot/.Xauthority"
-      - "TURTLEBOT_STAGE_WORLD_FILE=/home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/twoRobotsMaze.world"
+      - "TURTLEBOT_STAGE_WORLD_FILE=/home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/room_with_moving_objects.world"
     volumes:
     - "/tmp/.X11-unix:/tmp/.X11-unix"
     - "$HOME/.Xauthority:/home/turtlebot/.Xauthority"

@@ -39,4 +39,4 @@ done
 
 source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
-rosrun stage_ros stageros /home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/twoRobotsMaze.world _base_watchdog_timeout:=0.5 /robot_0/odom:=/robot_0/odom /robot_0/base_pose_ground_truth:=/robot_0/base_pose_ground_truth /robot_0/cmd_vel:=/robot_0/mobile_base/commands/velocity /robot_0/base_scan:=/robot_0/scan /robot_1/odom:=/robot_1/odom /robot_1/base_pose_ground_truth:=/robot_1/base_pose_ground_truth /robot_1/cmd_vel:=/robot_1/mobile_base/commands/velocity /robot_1/base_scan:=/robot_1/scan
+rosrun stage_ros stageros /home/turtlebot/catkin_ws/src/turtlebot_simulator/turtlebot_stage/maps/stage/room_with_static_objects.world _base_watchdog_timeout:=0.5 /robot_0/odom:=/robot_0/odom /robot_0/base_pose_ground_truth:=/robot_0/base_pose_ground_truth /robot_0/cmd_vel:=/robot_0/mobile_base/commands/velocity /robot_0/base_scan:=/robot_0/scan /robot_1/odom:=/robot_1/odom /robot_1/base_pose_ground_truth:=/robot_1/base_pose_ground_truth /robot_1/cmd_vel:=/robot_1/mobile_base/commands/velocity /robot_1/base_scan:=/robot_1/scan

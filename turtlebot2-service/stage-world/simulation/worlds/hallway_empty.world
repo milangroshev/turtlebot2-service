@@ -1,0 +1,56 @@
+include "turtlebot.inc"
+
+define floorplan model
+(
+  color "gray30"
+  boundary 1
+  gui_nose 0
+  gui_grid 0
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  laser_return 1
+)
+
+resolution 0.02
+interval_sim 100
+
+window
+(
+  size [600.0 700.0]
+  center [0.0 0.0]
+  rotate [0.0 0.0]
+  scale 60
+)
+
+# Pasillo vacío
+floorplan
+(
+  name "hallway"
+  size [15.0 3.0 2.0]  # Pasillo de 15m de largo y 3m de ancho
+  pose [7.5 1.5 0.0 0.0]  # Centrado en el mapa
+)
+
+# Pared izquierda
+define wall_left model
+(
+  size [15.0 0.1 1.0]  # Largo 15m, ancho 10cm, alto 1m
+  pose [7.5 0.0 0.5 0.0]
+  color "gray"
+)
+
+# Pared derecha
+define wall_right model
+(
+  size [15.0 0.1 1.0]  # Largo 15m, ancho 10cm, alto 1m
+  pose [7.5 3.0 0.5 0.0]
+  color "gray"
+)
+
+# Robots
+turtlebot
+(
+  pose [2.0 1.5 0.0 0.0]  # Posición inicial del Turtlebot
+  name "turtlebot"
+  color "black"
+)
