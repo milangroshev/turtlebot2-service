@@ -17,11 +17,11 @@ class DataCollector:
             "robot_state": {},
             "context_label": "Room with Static Objects"
         }
-        self.rate = rospy.Rate(10)  # 10 Hz
+        self.rate = rospy.Rate(1)  # 10 Hz
 
-        rospy.Subscriber('/scan', LaserScan, self.lidar_callback)
-        rospy.Subscriber('/odom', Odometry, self.odom_callback)
-        rospy.Subscriber('/cmd_vel', Twist, self.velocity_callback)
+        rospy.Subscriber('/robot_0/scan', LaserScan, self.lidar_callback)
+        rospy.Subscriber('/robot_0/odom', Odometry, self.odom_callback)
+        rospy.Subscriber('/robot_0/mobile_base/commands/velocity', Twist, self.velocity_callback)
 
     def lidar_callback(self, msg):
         self.data["sensor_data"]["lidar_ranges"] = list(msg.ranges)
@@ -49,12 +49,10 @@ class DataCollector:
             try:
                 with open('/home/ros/data_collector/dataset_static.json', 'r') as f:
                     dataset = json.load(f)
-
-                    # Verifica si el contenido cargado es una lista
-                    if not isinstance(dataset, list):
-                        rospy.logwarn("El archivo JSON no es una lista. Reemplazando con una lista vacía.")
-                        dataset = []
-            except IOError:  # Reemplazar FileNotFoundError con IOError
+                if not isinstance(dataset, list):
+                    rospy.logwarn("El archivo JSON no es una lista. Reemplazando con una lista vacía.")
+                    dataset = []
+            except IOError:
                 dataset = []  # Inicializa como lista vacía si el archivo no existe
 
             # Añadir los nuevos datos al dataset
