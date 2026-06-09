@@ -6,14 +6,16 @@ WORKDIR /root
 RUN groupadd -g 1000 turtlebot
 RUN useradd -d /home/turtlebot -s /bin/bash -m turtlebot -u 1000 -g 1000 && echo "turtlebot:turtlebot" | chpasswd && adduser turtlebot sudo
 
-RUN \
-  apt-get update && \
-  apt-get install -y lsof && \
-  apt-get install -y xauth && \
-  apt-get install -y python-rosinstall python-rosinstall-generator && \
-  apt-get install -y ros-kinetic-rviz && \
-  apt-get install -y ros-kinetic-turtlebot-navigation && \
-  apt-get install -y vim
+RUN apt-get update && \
+    apt-get install -y lsof xauth \
+      python-rosinstall python-rosinstall-generator \
+      ros-kinetic-rviz \
+      vim && \
+    apt-get install -y ros-kinetic-librealsense || true && \
+    printf '#!/bin/bash\nexit 0\n' > /var/lib/dpkg/info/ros-kinetic-librealsense.postinst && \
+    dpkg --configure ros-kinetic-librealsense && \
+    apt-get install -y -f && \
+    apt-get install -y ros-kinetic-turtlebot-navigation
 
 COPY launch/* /opt/ros/kinetic/share/rviz/launch/
 COPY rviz/* /opt/ros/kinetic/share/rviz/

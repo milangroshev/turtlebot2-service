@@ -6,25 +6,26 @@ WORKDIR /root
 RUN groupadd -g 1000 turtlebot
 RUN useradd -d /home/turtlebot -s /bin/bash -m turtlebot -u 1000 -g 1000 && echo "turtlebot:turtlebot" | chpasswd && adduser turtlebot sudo
 
-RUN \
-  apt-get update && \
-  apt-get install -y lsof && \
-  apt-get install -y xauth && \
-  apt-get install -y python-rosinstall python-rosinstall-generator && \
-  apt-get install -y ros-kinetic-turtlebot-bringup && \
-  apt-get install -y ros-kinetic-joint-state-publisher && \
-  apt-get install -y ros-kinetic-stage
-
+RUN apt-get update && \
+    apt-get install -y lsof xauth \
+      python-rosinstall python-rosinstall-generator \
+      ros-kinetic-stage \
+      ros-kinetic-rviz && \
+    apt-get install -y ros-kinetic-librealsense || true && \
+    printf '#!/bin/bash\nexit 0\n' > /var/lib/dpkg/info/ros-kinetic-librealsense.postinst && \
+    dpkg --configure ros-kinetic-librealsense && \
+    apt-get install -y -f && \
+    apt-get install -y ros-kinetic-turtlebot-navigation
 
 COPY launch/turtlebot_robot.launch /opt/ros/kinetic/share/turtlebot_bringup/launch/
 
 USER turtlebot
 WORKDIR /home/turtlebot
 
-
 RUN mkdir -p catkin_ws/src && cd catkin_ws/src && \
     git clone https://github.com/turtlebot/turtlebot_simulator.git && \
-    git clone https://github.com/ros-simulation/stage_ros.git
+    git clone https://github.com/ros-simulation/stage_ros.git && \
+    cd stage_ros && git checkout 1.8.0
 
 RUN cd catkin_ws && bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
 
@@ -42,5 +43,4 @@ COPY param/* /opt/ros/kinetic/share/kobuki_node/param/
 
 USER turtlebot
 ENV HOME /home/turtlebot
-#CMD bash -c "source /opt/ros/kinetic/setup.bash; source catkin_ws/devel/setup.bash; roslaunch turtlebot_bringup turtlebot_robot.launch"
 CMD bash -c "./wait-for-ros-nodes.sh"
